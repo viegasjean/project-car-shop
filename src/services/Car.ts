@@ -1,3 +1,4 @@
+import { ErrorTypes } from '../errors/catalog';
 import { carZodSchema, ICar } from '../interfaces/ICar';
 import { IModel } from '../interfaces/IModel';
 import IService from '../interfaces/IService';
@@ -18,13 +19,13 @@ class FrameService implements IService<ICar> {
 
   public async readOne(_id:string):Promise<ICar> {
     const frame = await this._frame.readOne(_id);
-    if (!frame) throw new Error('Não encontrado');
+    if (!frame) throw new Error(ErrorTypes.EntityNotFound);
     return frame;
   }
 
   public async read():Promise<ICar[]> {
     const frame = await this._frame.read();
-    if (!frame) throw new Error('Não encontrado');
+    if (!frame) throw new Error(ErrorTypes.EntityNotFound);
     return frame;
   }
 
