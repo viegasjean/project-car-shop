@@ -5,18 +5,19 @@ import MotorcycleService from '../services/Motorcycle';
 
 const route = Router();
 
+const routeID = '/motorcycles/:id';
+
 const motorcycle = new MotorcycleModel();
 const motorcycleService = new MotorcycleService(motorcycle);
 const motorcycleController = new MotorcycleController(motorcycleService);
 
 route.post('/motorcycles', (req, res) => motorcycleController.create(req, res));
 route.get('/motorcycles', (req, res) => motorcycleController.read(req, res));
-// eslint-disable-next-line sonarjs/no-duplicate-string
-route.get('/motorcycles/:id', (req, res) => motorcycleController
+route.get(routeID, (req, res) => motorcycleController
   .readOne(req, res));
-route.put('/motorcycles/:id', (req, res) => motorcycleController
+route.put(routeID, (req, res) => motorcycleController
   .update(req, res));
-route.delete('/motorcycles/:id', (req, res) => motorcycleController
+route.delete(routeID, (req, res) => motorcycleController
   .delete(req, res));
 
 export default route;
