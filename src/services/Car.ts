@@ -4,9 +4,9 @@ import { IModel } from '../interfaces/IModel';
 import IService from '../interfaces/IService';
 
 class FrameService implements IService<ICar> {
-  private _frame:IModel<ICar>;
+  private _car:IModel<ICar>;
   constructor(model:IModel<ICar>) {
-    this._frame = model;
+    this._car = model;
   }
 
   public async create(obj:ICar):Promise<ICar> {
@@ -14,17 +14,17 @@ class FrameService implements IService<ICar> {
     if (!parsed.success) {
       throw parsed.error;
     }
-    return this._frame.create(obj);
+    return this._car.create(obj);
   }
 
   public async readOne(_id:string):Promise<ICar> {
-    const frame = await this._frame.readOne(_id);
+    const frame = await this._car.readOne(_id);
     if (!frame) throw new Error(ErrorTypes.EntityNotFound);
     return frame;
   }
 
   public async read():Promise<ICar[]> {
-    const frame = await this._frame.read();
+    const frame = await this._car.read();
     if (!frame) throw new Error(ErrorTypes.EntityNotFound);
     return frame;
   }
@@ -35,12 +35,12 @@ class FrameService implements IService<ICar> {
       throw parsed.error;
     }
     await this.readOne(_id);
-    return this._frame.update(_id, obj);
+    return this._car.update(_id, obj);
   }
 
   public async delete(_id:string):Promise<ICar | null> {
     await this.readOne(_id);
-    return this._frame.delete(_id);
+    return this._car.delete(_id);
   }
 }
 
